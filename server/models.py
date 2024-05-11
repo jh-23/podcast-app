@@ -13,9 +13,10 @@ class User(db.Model, SerializerMixin):
     password = db.Column(db.String)
     
     
-class UserPodcastReviews(db.Model, SerializerMixin):
-    pass
-
+class UserPodcastReview(db.Model, SerializerMixin):
+    __table__name = 'user_podcast_reviews'
+    
+    id = db.Column(db.Integer, primary_key=True)
 
 
 class Podcast(db.Model, SerializerMixin):
