@@ -6,21 +6,30 @@ from config import db
 # Models go here!
 
 class User(db.Model, SerializerMixin):
-    __table__name = 'users'
+    __tablename__ = 'users'
     
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String)
     password = db.Column(db.String)
     
+    #relationship
+    user_podcast_reviews = db.relationship('UserPodcastReview', backpopulates=('user'))
+    
     
 class UserPodcastReview(db.Model, SerializerMixin):
-    __table__name = 'user_podcast_reviews'
+    __tablename__ = 'user_podcast_reviews'
     
     id = db.Column(db.Integer, primary_key=True)
+    
+    user = db.relationship('User', backpopulates=(''))
+    
+    #Foreign Keys
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    podcast_id = db.Column(db.Integer, db.ForeignKey('podcasts.id'))
 
 
 class Podcast(db.Model, SerializerMixin):
-    __table__name = 'podcasts'
+    __tablename__ = 'podcasts'
     
     id = db.Column(db.Integer, primary_key=True)
     channel = db.Column(db.String)
