@@ -1,5 +1,6 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.orm import validates
 
 from config import db
 
@@ -14,9 +15,17 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String)
     password = db.Column(db.String)
     
-    #relationship
+    # relationship
     user_podcast_reviews = db.relationship('UserPodcastReview', backpopulates=('user'))
-    
+
+    # validation 
+    @validates('username')
+    def validate_username(self, key, username):
+        if 4 <= len(username) <= 14:
+            return username
+        else:
+            raise ValueError('Username must be between 4 and 14 characters, inclusive')
+           
     
 class UserPodcastReview(db.Model, SerializerMixin):
     __tablename__ = 'user_podcast_reviews'
