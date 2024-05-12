@@ -16,8 +16,8 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String)
     password = db.Column(db.String)
     
-    # relationship
-    user_podcast_reviews = db.relationship('UserPodcastReview', backpopulates=('user'))
+    # relationship method that maps User to related UserPodcastReview
+    user_podcast_reviews = db.relationship('UserPodcastReview', back_populates='user', cascade='all, delete-orphan')
 
     # validation 
     @validates('username')
@@ -37,15 +37,15 @@ class UserPodcastReview(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     podcast_review = db.Column(db.String)
     
-    #relationship
-    user = db.relationship('User', backpopulates=('user_podcast_reviews'))
-    
     #Foreign Keys
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     podcast_id = db.Column(db.Integer, db.ForeignKey('podcasts.id'))
+    
+    #relationship method maps our UserPodcastReview to User
+    user = db.relationship('User', back_populates='user_podcast_reviews')
 
-    #relationship
-    podcast = db.relationship('Podcast', backpopulates=('user_podcast_review'))
+    #relationship method maps our UserPodcastReview to Podcast
+    podcast = db.relationship('Podcast', back_populates=('user_podcast_reviews'))
 
 class Podcast(db.Model, SerializerMixin):
     
@@ -60,7 +60,7 @@ class Podcast(db.Model, SerializerMixin):
     image = db.Column(db.String)
     rating = db.Column(db.String)
 
-    #relationship
-    user_podcast_reviews = db.relationship('UserPodcastReview', backpopulates=('podcast'))
+    #relationship method that maps our Podcast to UserPodcastReview
+    user_podcast_reviews = db.relationship('UserPodcastReview', back_populates=('podcast'), cascade='all, delete-orphan')
     
     
