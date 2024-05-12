@@ -7,6 +7,7 @@ from config import db
 # Models go here!
 
 class User(db.Model, SerializerMixin):
+    
     __tablename__ = 'users'
     
     serialize_rules = ('-user_podcast_reviews.user', )
@@ -28,11 +29,13 @@ class User(db.Model, SerializerMixin):
            
     
 class UserPodcastReview(db.Model, SerializerMixin):
+    
     __tablename__ = 'user_podcast_reviews'
     
     serialize_rules = ('-user.user_podcast_reviews', '-podcast.user_podcast_reviews')
     
     id = db.Column(db.Integer, primary_key=True)
+    podcast_review = db.Column(db.String)
     
     #relationship
     user = db.relationship('User', backpopulates=('user_podcast_reviews'))
@@ -45,6 +48,7 @@ class UserPodcastReview(db.Model, SerializerMixin):
     podcast = db.relationship('Podcast', backpopulates=('user_podcast_review'))
 
 class Podcast(db.Model, SerializerMixin):
+    
     __tablename__ = 'podcasts'
     
     serialize_rules = ('-user_podcast_reviews.podcast', )
@@ -60,5 +64,3 @@ class Podcast(db.Model, SerializerMixin):
     user_podcast_reviews = db.relationship('UserPodcastReview', backpopulates=('podcast'))
     
     
-    
-
