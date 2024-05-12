@@ -45,15 +45,24 @@ def podcasts():
 def user_by_id(id):
     
     user = User.query.filter(User.id == id).first()
+        
+    if user:
+        user_dict = user.to_dict()
     
-    user_dict = user.to_dict()
-    
-    response = make_response(
-        user_dict,
-        200
+        response = make_response(
+            user_dict,
+            200
     )
     
-    return response 
+        return response 
+    
+    else:
+        response = make_response(
+            {"error": "user not found"},
+            404
+        )
+        
+        return response
 
 
 if __name__ == '__main__':
