@@ -54,6 +54,7 @@ class Podcast(db.Model, SerializerMixin):
     years_active = db.Column(db.String)
     episodes = db.Column(db.String)
     image = db.Column(db.String)
+    rating = db.Column(db.String)
 
     #relationship
     user_podcast_reviews = db.relationship('UserPodcastReview', backpopulates=('podcast'))
