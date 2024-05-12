@@ -28,7 +28,32 @@ def users():
     )
     
     return response
+
+@app.route('/podcasts', methods=['GET'])
+def podcasts():
     
+    podcasts = [podcast.to_dict() for podcast in Podcast.query.all()]
+    
+    response = make_response(
+        podcasts,
+        200
+    )
+    
+    return response
+
+@app.route('/users/<int:id>')
+def user_by_id(id):
+    
+    user = User.query.filter(User.id == id).first()
+    
+    user_dict = user.to_dict()
+    
+    response = make_response(
+        user_dict,
+        200
+    )
+    
+    return response 
 
 
 if __name__ == '__main__':
