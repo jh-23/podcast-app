@@ -52,7 +52,7 @@ def user_by_id(id):
         response = make_response(
             user_dict,
             200
-    )
+        )
     
         return response 
     
@@ -64,6 +64,31 @@ def user_by_id(id):
         
         return response
 
+@app.route('/podcasts/<int:id>', methods=['DELETE'])
+def podcast_by_id(id):
+    
+    podcast = Podcast.query.filter(Podcast.id == id).first()
+    
+    if podcast:
+        
+        db.session.delete(podcast)
+        
+        db.session.commit()
+        
+        response = make_response(
+            {},
+            202
+        )
+        
+        return response
+        
+    else:
+        response = make_response(
+            {"error": "Podcast not found!"},
+            404
+        )
+        
+        return response
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
