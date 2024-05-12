@@ -53,7 +53,10 @@ if __name__ == '__main__':
         
         modern_wisdom_review = UserPodcastReview(
             id=1,
-            
-            
+            podcast_review="Great conversations with a ton of personal psychological insights.  Help me to think and improve my daily life!"
         )
         
+        stuff_you_should_know_review = UserPodcastReview(
+            id=2,
+            podcast_review="Great podcast to learn something, and also great puns by the podcasters!"
+        )
