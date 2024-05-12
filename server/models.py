@@ -45,7 +45,7 @@ class UserPodcastReview(db.Model, SerializerMixin):
     user = db.relationship('User', back_populates='user_podcast_reviews')
 
     #relationship method maps our UserPodcastReview to Podcast
-    podcast = db.relationship('Podcast', back_populates=('user_podcast_reviews'))
+    podcast = db.relationship('Podcast', back_populates='user_podcast_reviews')
 
 class Podcast(db.Model, SerializerMixin):
     
@@ -61,6 +61,6 @@ class Podcast(db.Model, SerializerMixin):
     rating = db.Column(db.String)
 
     #relationship method that maps our Podcast to UserPodcastReview
-    user_podcast_reviews = db.relationship('UserPodcastReview', back_populates=('podcast'), cascade='all, delete-orphan')
+    user_podcast_reviews = db.relationship('UserPodcastReview', back_populates='podcast', cascade='all, delete-orphan')
     
     
