@@ -36,9 +36,16 @@ if __name__ == '__main__':
         modern_wisdom = Podcast(
             id=1,
             channel="Modern Wisdom",
-            years_active="2018",
+            podcast_start="2018",
             episodes="780",
-            image="https://is1-ssl.mzstatic.com/image/thumb/Podcasts122/v4/99/dc/91/99dc9113-546a-038a-7204-84c6265b6766/mza_5176103474815286855.jpg/626x0w.webp"
+            image="https://is1-ssl.mzstatic.com/image/thumb/Podcasts122/v4/99/dc/91/99dc9113-546a-038a-7204-84c6265b6766/mza_5176103474815286855.jpg/626x0w.webp",
+            rating=
+        )
+        
+        stuff_you_should_know = Podcast(
+            id=2,
+            channel="Stuff You Should Know",
+            podcast_start="2008"
         )
         
         

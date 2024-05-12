@@ -51,7 +51,7 @@ class Podcast(db.Model, SerializerMixin):
     
     id = db.Column(db.Integer, primary_key=True)
     channel = db.Column(db.String)
-    years_active = db.Column(db.String)
+    podcast_start = db.Column(db.String)
     episodes = db.Column(db.String)
     image = db.Column(db.String)
     rating = db.Column(db.String)
