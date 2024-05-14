@@ -17,17 +17,44 @@ from models import db, User, Podcast, UserPodcastReview
 def index():
     return '<h1>Project Server</h1>'
 
-@app.route('/users', methods=['GET'])
+@app.route('/users', methods=['GET', 'POST'])
 def users():
     
-    users = [user.to_dict() for user in User.query.all()]
+    if request.method == 'GET':
+        users = [user.to_dict() for user in User.query.all()]
+        
+        response = make_response(
+            users,
+            200
+        )
+        
+        return response
     
-    response = make_response(
-        users,
-        200
-    )
-    
-    return response
+    # elif request.method == 'POST':
+    #     form_data = request.get_json()
+        
+    #     try:
+            
+    #         new_user_obj = User(
+    #             username = form_data['username'],
+    #             password = form_data['password']
+    #         )
+        
+    #         db.session.add(new_user_obj)
+    #         db.session.commit()
+            
+    #         new_user_obj_dict = new_user_obj.to_dict()
+            
+    #         response = make_response(
+    #             new_user_obj_dict,
+    #             201
+    #         )
+            
+    #         return response
+        
+    #     except ValueError:
+    #         return {'error': 'invalid username, must be between 4 and 14 characters'}, 422
+        
 
 @app.route('/podcasts', methods=['GET'])
 def podcasts():
