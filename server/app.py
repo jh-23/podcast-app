@@ -116,6 +116,18 @@ def podcast_by_id(id):
         )
         
         return response
+    
+@app.route('/reviews', methods=['GET'])
+def reviews():
+    
+    reviews = [review.to_dict() for review in UserPodcastReview.query.all()]
+    
+    response = make_response(
+        reviews,
+        200
+    )
+
+    return response
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
