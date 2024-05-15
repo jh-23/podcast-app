@@ -68,11 +68,15 @@ with app.app_context():
         
         user_podcast_reviews_to_add.append(UserPodcastReview(
             id=1,
+            user_id=1,
+            podcast_id=1,
             podcast_review="Great conversations with a ton of personal psychological insights.  Help me to think and improve my daily life!"
         ))
         
         user_podcast_reviews_to_add.append(UserPodcastReview(
             id=2,
+            user_id=2,
+            podcast_id=2,
             podcast_review="Great podcast to learn something, and also great puns by the podcasters!"
         ))
         
