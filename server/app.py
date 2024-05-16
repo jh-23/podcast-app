@@ -3,7 +3,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, make_response
+from flask import request, make_response, request, session
 from flask_restful import Resource
 
 # Local imports
@@ -128,6 +128,26 @@ def reviews():
     )
 
     return response
+
+
+
+
+# Using Resources
+
+class Login(Resource):
+    def post(self):
+        user = User.query.filter(User.username == request.get_json()['username']).first()
+        
+        session['user_id'] = user.id
+        
+        response = make_response(
+            user.to_dict(),
+            200
+        )
+        
+        return response
+    
+api.add_resource(Login, '/login')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
