@@ -17,43 +17,58 @@ from models import db, User, Podcast, UserPodcastReview
 def index():
     return '<h1>Project Server</h1>'
 
-@app.route('/users', methods=['GET', 'POST'])
-def users():
+# User Routes - Resources
+
+class Users(Resource):
     
-    if request.method == 'GET':
-        users = [user.to_dict() for user in User.query.all()]
+    def get(self):
+        
+        user_dict_list = [user.to_dict() for user in User.query.all()]
         
         response = make_response(
-            users,
+            user_dict_list,
             200
         )
         
         return response
     
-    elif request.method == 'POST':
-        form_data = request.get_json()
+    def post(self):
         
-        try:
-            
-            new_user_obj = User(
-                username = form_data['username'],
-                password = form_data['password']
-            )
+        json = request.get_json()
         
-            db.session.add(new_user_obj)
-            db.session.commit()
-            
-            new_user_obj_dict = new_user_obj.to_dict()
-            
-            response = make_response(
-                new_user_obj_dict,
-                201
-            )
-            
-            return response
+        new_user = User(
+            username = json.get('username'),
+            password = json.get('password')
+        )
         
-        except ValueError:
-            return {'error': 'invalid username, must be between 4 and 14 characters'}, 422
+        db.session.add(new_user)
+        db.session.commit()
+        
+        response_dict = new_user.to_dict()
+        
+        response = make_response(
+            response_dict,
+            201
+        )
+        
+        return response
+    
+api.add_resource(Users, '/users')
+
+class UserByID(Resource):
+    
+    def get(self, id):
+        
+        response_dict = User.query.filter_by(id=id).first().to_dict()
+        
+        response = make_response(
+            response_dict,
+            200
+        )
+        
+        return response
+    
+api.add_resource(UserByID, '/users/<int:id>')
 
 
 # Podcast Routes - Resources
@@ -138,49 +153,14 @@ class PodcastByID(Resource):
 
 api.add_resource(PodcastByID, '/podcasts/<int:id>')
 
-       
-
-@app.route('/users/<int:id>')
-def user_by_id(id):
-    
-    user = User.query.filter(User.id == id).first()
-        
-    if user:
-        user_dict = user.to_dict()
-    
-        response = make_response(
-            user_dict,
-            200
-        )
-    
-        return response 
-    
-    else:
-        response = make_response(
-            {"error": "user not found"},
-            404
-        )
-        
-        return response
-
-
-    
-@app.route('/reviews', methods=['GET'])
-def reviews():
-    
-    reviews = [review.to_dict() for review in UserPodcastReview.query.all()]
-    
-    response = make_response(
-        reviews,
-        200
-    )
-
-    return response
 
 
 
 
-# Using Resources
+
+
+
+
 
 class Login(Resource):
     def post(self):
