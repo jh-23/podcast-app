@@ -3,7 +3,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, make_response, request, session
+from flask import request, make_response, session
 from flask_restful import Resource
 
 # Local imports
@@ -30,43 +30,115 @@ def users():
         
         return response
     
-    # elif request.method == 'POST':
-    #     form_data = request.get_json()
+    elif request.method == 'POST':
+        form_data = request.get_json()
         
-    #     try:
+        try:
             
-    #         new_user_obj = User(
-    #             username = form_data['username'],
-    #             password = form_data['password']
-    #         )
+            new_user_obj = User(
+                username = form_data['username'],
+                password = form_data['password']
+            )
         
-    #         db.session.add(new_user_obj)
-    #         db.session.commit()
+            db.session.add(new_user_obj)
+            db.session.commit()
             
-    #         new_user_obj_dict = new_user_obj.to_dict()
+            new_user_obj_dict = new_user_obj.to_dict()
             
-    #         response = make_response(
-    #             new_user_obj_dict,
-    #             201
-    #         )
+            response = make_response(
+                new_user_obj_dict,
+                201
+            )
             
-    #         return response
+            return response
         
-    #     except ValueError:
-    #         return {'error': 'invalid username, must be between 4 and 14 characters'}, 422
-        
+        except ValueError:
+            return {'error': 'invalid username, must be between 4 and 14 characters'}, 422
 
-@app.route('/podcasts', methods=['GET'])
-def podcasts():
+
+# Podcast Routes - Resources
+
+class Podcasts(Resource):
     
-    podcasts = [podcast.to_dict() for podcast in Podcast.query.all()]
+    def get(self):
+        podcast_dict_list = [podcast.to_dict() for podcast in Podcast.query.all()]
+        
+        response = make_response(
+            podcast_dict_list,
+            200)
+        
+        return response
     
-    response = make_response(
-        podcasts,
-        200
-    )
+    def post(self):
+        
+        json = request.get_json()
+        
+        new_podcast = Podcast(
+            channel = json.get('channel'),
+            podcast_start = json.get('podcast_start'),
+            episodes = json.get('episodes'),
+            image = json.get('image'),
+            rating = json.get('rating')
+        )
+        
+        db.session.add(new_podcast)
+        db.session.commit()
+        
+        response_dict = new_podcast.to_dict()
+        
+        response = make_response(
+            response_dict,
+            201
+        )
+        
+        return response
+
+api.add_resource(Podcasts, '/podcasts')
+
+class PodcastByID(Resource):
     
-    return response
+    def get(self, id):
+        
+        response_dict = Podcast.query.filter_by(id=id).first().to_dict()
+        
+        response = make_response(
+            response_dict,
+            200
+        )
+        
+        return response
+    
+    def patch(self, id):
+        
+        json = request.get_json()
+        
+        podcast = Podcast.query.filter(Podcast.id == id).first()
+        for attr in json:
+            setattr(podcast, attr, json[attr])
+            
+        db.session.add(podcast)
+        db.session.commit()
+        
+        response = make_response(
+            podcast.to_dict(),
+            200
+        )
+        
+        return response
+    
+    def delete(self, id):
+        
+        podcast = Podcast.query.filter_by(id=id).first()
+        db.session.delete(podcast)
+        db.session.commit()
+        
+        response = make_response({'message': 'successful deletion of podcast'}, 202)
+        
+        return response
+
+api.add_resource(PodcastByID, '/podcasts/<int:id>')
+
+       
 
 @app.route('/users/<int:id>')
 def user_by_id(id):
@@ -91,31 +163,7 @@ def user_by_id(id):
         
         return response
 
-@app.route('/podcasts/<int:id>', methods=['DELETE'])
-def podcast_by_id(id):
-    
-    podcast = Podcast.query.filter(Podcast.id == id).first()
-    
-    if podcast:
-        
-        db.session.delete(podcast)
-        
-        db.session.commit()
-        
-        response = make_response(
-            {},
-            202
-        )
-        
-        return response
-        
-    else:
-        response = make_response(
-            {"error": "Podcast not found!"},
-            404
-        )
-        
-        return response
+
     
 @app.route('/reviews', methods=['GET'])
 def reviews():
