@@ -23,18 +23,21 @@ with app.app_context():
         #seed 2 users
         users_to_add = []
         
-        users_to_add.append(User(
+        user1 = (User(
             id=1,
-            username="jimjenkins",
-            _password_hash="rockstar"
+            username="jimjenkins"
         ))
+        user1.password_hash = "rockstar"
         
-        users_to_add.append(User(
+        user2 = (User(
             id=2,
-            username="jillpill",
-            _password_hash="bffjillb2bc2"
+            username="jillpill"
         ))
         
+        user2.password_hash="bffjillb2bc2"
+        
+        users_to_add.append(user1)
+        users_to_add.append(user2)
         db.session.add_all(users_to_add)
 
         
