@@ -26,13 +26,13 @@ with app.app_context():
         users_to_add.append(User(
             id=1,
             username="jimjenkins",
-            password="rockstar"
+            _password_hash="rockstar"
         ))
         
         users_to_add.append(User(
             id=2,
             username="jillpill",
-            password="bffjillb2bc2"
+            _password_hash="bffjillb2bc2"
         ))
         
         db.session.add_all(users_to_add)
