@@ -7,6 +7,7 @@ import NavBar from "../NavBar";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [podcasts, setPodcasts] = useState([])
 
   useEffect(() => {
     fetch("/users")
@@ -14,9 +15,19 @@ function App() {
       .then((users) => console.log(users))
   }, [])
 
+  useEffect(() => {
+    fetch("/podcasts")
+      .then((r) => r.json())
+      .then((podcasts) => setPodcasts(podcasts))
+  }, [])
+
+  console.log(podcasts)
+
   function handleLogin(user){
     setUser(user)
   }
+
+
 
 
   return <main>
@@ -24,6 +35,18 @@ function App() {
           <h1>Project Client</h1>
           <AllPodcasts />
           <AllReviews />
+          {podcasts.map((podcast) => (
+            <div key={podcast.id}>
+              <h2>{podcast.channel}</h2>
+              <p>{podcast.podcast_start}</p>
+              <p>{podcast.episodes}</p>
+              <img src={podcast.image} alt={podcast.channel} />
+              <p>{podcast.rating}</p>
+              <button>Edit</button>
+              <button>Delete</button>
+              <button>Add Review</button>
+            </div>
+          ))}
           <Login onLogin={handleLogin} />
         </main>
 

@@ -7,8 +7,6 @@ function PodcastProfile() {
     const params = useParams()
     const podcastId = params.id;
 
-    
-
 
     return(
         <>
