@@ -1,17 +1,29 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link, Outlet } from 'react-router-dom';
 import "./NavBar.css";
 
 function NavBar() {
     return (
-        <nav>
-            <NavLink
-            to="/"
-            className="nav-link"
-            >
-            Home
-            </NavLink>
-
-        </nav>
+        <div>
+            <header>
+            <nav>
+                <NavLink
+                to="/"
+                className="nav-link"
+                >
+                Home
+                </NavLink>
+                <NavLink
+                to='/newpodcastform'
+                className="nav-link"
+                >
+                New Podcast Form
+                </NavLink>
+            </nav>
+            </header>
+            <main>
+                {/* <Outlet /> */}
+            </main>
+        </div>
     )
 
 }

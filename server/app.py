@@ -6,6 +6,7 @@
 from flask import request, make_response, session
 from flask_restful import Resource
 from flask_cors import CORS
+from sqlalchemy.exc import IntegrityError
 
 # Local imports
 from config import app, db, api
@@ -267,10 +268,13 @@ class Signup(Resource):
         )
         user.password_hash = json['password']
         
-        # try:
-        #     db.session.add(user)
-        #     db.session.commit()
-        #     session[]
+        try:
+            db.session.add(user)
+            db.session.commit()
+            session['user_id'] = user.id
+            return user.to_dict(), 201
+        except IntegrityError:
+            return {'error': 'invalid login credentials'}
         
 api.add_resource(Signup, '/signup', endpoint='signup')
 

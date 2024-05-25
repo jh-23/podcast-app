@@ -1,9 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
 import AllPodcasts from "./AllPodcasts";
 import AllReviews from "./AllReviews";
 import Login from "../Login";
 import NavBar from "../NavBar";
+import NewPodcastForm from "./NewPodcastForm";
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom";
+import PodcastCard from "./PodcastCard";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<NavBar />}>
+      <Route index element={<App />}></Route>
+      <Route path="newpodcastform" element={<NewPodcastForm />}></Route>
+      <Route path="profile" element={<PodcastCard />}></Route>
+    </Route>
+  )
+)
 
 function App() {
   const [user, setUser] = useState(null);
@@ -27,14 +39,19 @@ function App() {
     setUser(user)
   }
 
+  function addPodcast(newPodcast) {
+    const updatedPodcastList = [...podcasts, newPodcast]
+    console.log(updatedPodcastList)
+    setPodcasts(updatedPodcastList)
+  }
 
 
 
-  return <main>
-          <NavBar />
-          <h1>Project Client</h1>
-          <AllPodcasts />
-          <AllReviews />
+  return (
+    <>
+        <RouterProvider router={router} />
+
+        <h1>Project Client</h1>
           {podcasts.map((podcast) => (
             <div key={podcast.id}>
               <h2>{podcast.channel}</h2>
@@ -47,9 +64,8 @@ function App() {
               <button>Add Review</button>
             </div>
           ))}
-          <Login onLogin={handleLogin} />
-        </main>
-
+    </>
+  )
 }
 
 export default App;
