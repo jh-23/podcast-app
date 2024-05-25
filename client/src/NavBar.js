@@ -21,7 +21,6 @@ function NavBar() {
             </nav>
             </header>
             <main>
-                {/* <Outlet /> */}
             </main>
         </div>
     )

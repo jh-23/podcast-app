@@ -41,6 +41,7 @@ function NewPodcastForm() {
         return(
             <div className="new-podcast-form">
                 <br />
+                <h1>Podcast Form</h1>
                 <form onSubmit={handleSubmit}>
                     <h3>Add New Podcast Information Here:</h3>
                     <br />
