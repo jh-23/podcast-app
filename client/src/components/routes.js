@@ -1,8 +1,8 @@
 import App from "./App.js"
-import Login from "../Login.js"
 import PodcastProfile from "./PodcastProfile.js"
 import NewPodcastForm from "./NewPodcastForm.js"
 import Home from "./Home.js"
+import LoginForm from "../LoginForm.js"
 
 const routes = [
     {
@@ -25,9 +25,9 @@ const routes = [
         ]
     },
     {
-        path:"/login",
-        element: <Login /> 
-    },
+        path:"/loginform",
+        element: <LoginForm /> 
+    }
 ];
 
 export default routes;

@@ -22,7 +22,7 @@ function PodcastProfile() {
         <>
             <main>
                 <h1>Podcast: {podcast.channel}</h1>
-                <h3>Start (Year): {podcast.podcast_start}</h3>
+                <h3>Podcast Start (Year): {podcast.podcast_start}</h3>
                 <p>Episodes: {podcast.episodes}</p>
                 <p>Rating: {podcast.rating}</p>
                 <img src={podcast.image} alt={podcast.channel} />
