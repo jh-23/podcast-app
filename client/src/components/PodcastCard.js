@@ -6,7 +6,7 @@ function PodcastCard({ podcast }) {
         <article>
             <h2>{podcast.name}</h2>
             <p>
-            <Link to={`/profile/${podcast.id}`}>View profile</Link>
+            <Link to={`/podcastprofile/${podcast.id}`}>{podcast.channel}</Link>
             </p>
         </article>
     )

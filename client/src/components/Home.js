@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import PodcastCard from './PodcastCard';
 
 function Home() {
 
@@ -19,11 +19,26 @@ function Home() {
         .then((podcasts) => setPodcasts(podcasts))
     }, [])
 
+    const podcastList = podcasts.map((podcast) => {
+        return <PodcastCard key={podcast.id} podcast={podcast} />
+    })
 
     return(
         <div>
+            <h1>User's Podcasts:</h1>
+            {podcastList}
+        </div>
+    )
+}
+
+export default Home;
+
+
+
+
+
             {/* <Link to={`/podcasts`}></Link> */}
-            {podcasts.map((podcast) => (
+            {/* {podcasts.map((podcast) => (
             <div key={podcast.id}>
               <h2>{podcast.channel}</h2>
               <p>{podcast.podcast_start}</p>
@@ -34,9 +49,4 @@ function Home() {
               <button>Delete</button>
               <button>Add Review</button>
             </div>
-          ))}
-        </div>
-    )
-}
-
-export default Home;
+          ))} */}
