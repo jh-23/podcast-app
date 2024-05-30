@@ -58,6 +58,16 @@ class Users(Resource):
     
 api.add_resource(Users, '/users')
 
+class UsersPodcasts(Resource):
+    
+    def get(self):
+        
+        user = User.query.filter(User.id == session['user_id']).first()
+        
+        return [podcast.to_dict() for podcast in user.user_podcast_reviews]
+    
+api.add_resource(UsersPodcasts, "/userspodcasts")
+
 class UserByID(Resource):
     
     def get(self, id):
@@ -237,11 +247,14 @@ class Logout(Resource):
         elif session['user_id'] == None:
             return {'error': 'message'}, 401
 
+api.add_resource(Logout, '/logout', endpoint='logout')
+
 class CheckSession(Resource):
     
     def get(self):
         
-        user = User.query.filter(User.id == session['user_id']).first()
+        user_id = session['user_id']
+        user = User.query.filter(User.id == user_id).first()
         
         if user:
             response = make_response(
@@ -277,6 +290,18 @@ class Signup(Resource):
             return {'error': 'invalid login credentials'}
         
 api.add_resource(Signup, '/signup', endpoint='signup')
+
+@app.before_request
+def check_if_logged_in():
+    open_access_list = [
+        'signup',
+        'login',
+        'check_session'
+    ]
+
+    if (request.endpoint) not in open_access_list and (not session.get('user_id')):
+        return {'error': '401 Unauthorized'}, 401
+    
 
 
 if __name__ == '__main__':
