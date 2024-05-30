@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 
-function LoginForm({ onLogin }) {
 
+function LoginForm() {
+
+    const [user, setUser] = useState(null)
+    // pass down user and setUser as a prop
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
@@ -10,7 +13,7 @@ function LoginForm({ onLogin }) {
     function handleSubmit(e){
         e.preventDefault()
         setIsLoading(true);
-        fetch("/loginform", {
+        fetch("/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -19,24 +22,38 @@ function LoginForm({ onLogin }) {
         }).then((r) => {
             setIsLoading(false);
             if (r.ok) {
-                r.json().then((user) => onLogin(user))
+                r.json().then((user) => setUser(user))
             } else {
                 r.json().then((err) => setErrors(err.errors))
             }
         })
     }
 
+    // function handleLogin(username) {
+    //     setUsername(username)
+    // }
+
     return(
         <form onSubmit={handleSubmit} >
-            <formfield>
-                <label htmlFor='username'>Username</label>
+                <label htmlFor='username'>Username: </label>
             <input 
                 type="text"
+                id="username"
+                autoComplete='off'
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
-            </formfield>
-            <button type="submit">Login</button>
+                <label htmlFor='password'>Password: </label>
+                <input
+                type="password"
+                id="password"
+                autoComplete='current-password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                ></input>
+                <button variant='fill' color='primary' type="submit">
+                {isLoading ? "Loading..." : "Login"}
+                </button>
         </form>
     )
 }

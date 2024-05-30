@@ -18,6 +18,12 @@ function NavBar() {
                 >
                 New Podcast Form
                 </NavLink>
+                <NavLink
+                to='/logout'
+                className='nav-link'
+                >
+                Logout
+                </NavLink>
             </nav>
             </header>
             <main>

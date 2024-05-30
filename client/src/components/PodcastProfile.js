@@ -1,8 +1,12 @@
 import React, { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import NavBar from '../NavBar';
 
 function PodcastProfile() {
+
+    const handleDeletePodcast = useOutletContext();
+
     const [podcast, setPodcasts] = useState([]);
     const params = useParams()
     const podcastId = params.id;
@@ -18,6 +22,15 @@ function PodcastProfile() {
         return <h1>Loading...</h1>
     }
 
+    function handleDeleteClick() {
+        fetch(`/podcasts/${podcastId}`, {
+            method: "DELETE",
+        })
+        handleDeletePodcast(podcastId)
+    }
+
+    
+
     return(
         <>
             <main>
@@ -29,7 +42,7 @@ function PodcastProfile() {
                 <br />
                 <button>Edit Podcast</button>
                 <br />
-                <button>Delete Podcast</button>
+                <button onClick={handleDeleteClick}>Delete Podcast</button>
                 <br />
                 <button>Add Podcast Review</button>
             </main>

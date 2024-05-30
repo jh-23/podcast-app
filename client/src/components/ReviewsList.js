@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 
-function AllReviews() {
+function ReviewsList() {
+
+    const [review, setReview] = useState("");
 
     useEffect(() => {
         fetch('/reviews')
             .then((r) => r.json())
-            .then((reviews) => console.log(reviews))
+            .then((review) => setReview(review))
     }, [])
 
     return(
@@ -13,4 +15,4 @@ function AllReviews() {
     )
 }
 
-export default AllReviews;
+export default ReviewsList;

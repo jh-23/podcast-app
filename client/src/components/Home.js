@@ -12,6 +12,8 @@ function Home() {
         .then((user) => setUser(user))
     }, [])
 
+    
+
   
     useEffect(() => {
       fetch("/podcasts")

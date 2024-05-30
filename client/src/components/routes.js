@@ -3,6 +3,8 @@ import PodcastProfile from "./PodcastProfile.js"
 import NewPodcastForm from "./NewPodcastForm.js"
 import Home from "./Home.js"
 import LoginForm from "../LoginForm.js"
+import NewReview from "./NewReview.js"
+import Logout from "./Logout.js"
 
 const routes = [
     {
@@ -19,15 +21,27 @@ const routes = [
             },
             {
                 path:"/podcastprofile/:id",
-                element:<PodcastProfile />
-            }
+                element: <PodcastProfile />,
 
+            },
+            {
+                path: "/newpodcastreview",
+                element: <NewReview />
+            },
+            {
+                path: "/login",
+                element: <LoginForm />
+            },
+            {
+                path: "/logout",
+                element: <Logout />
+            }
         ]
     },
-    {
-        path:"/loginform",
-        element: <LoginForm /> 
-    }
+    // {
+    //     path:"/loginform",
+    //     element: <LoginForm /> 
+    // }
 ];
 
 export default routes;
