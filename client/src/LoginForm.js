@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 
-function LoginForm() {
+function LoginForm({ onLogin }) {
 
-    const [user, setUser] = useState(null)
-    // pass down user and setUser as a prop
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
@@ -22,19 +21,16 @@ function LoginForm() {
         }).then((r) => {
             setIsLoading(false);
             if (r.ok) {
-                r.json().then((user) => setUser(user))
+                r.json().then((user) => onLogin(user))
             } else {
                 r.json().then((err) => setErrors(err.errors))
             }
         })
     }
 
-    // function handleLogin(username) {
-    //     setUsername(username)
-    // }
-
     return(
         <form onSubmit={handleSubmit} >
+            <h2>Welcome to the Podcast Reviews App! </h2>
                 <label htmlFor='username'>Username: </label>
             <input 
                 type="text"

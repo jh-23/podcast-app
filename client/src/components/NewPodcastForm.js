@@ -15,7 +15,7 @@ function NewPodcastForm() {
         e.preventDefault();
         const formData = {
             channel: channel,
-            podcastStart: podcastStart,
+            podcas_start: podcastStart,
             episodes: episodes,
             image: image,
             rating: rating

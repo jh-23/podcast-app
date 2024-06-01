@@ -1,20 +1,24 @@
 import React, { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import { useOutletContext } from 'react-router-dom';
-import NavBar from '../NavBar';
+import UserPodcastReviews from './UserPodcastReviews';
+import EditPodcastForm from './EditPodcastForm';
+import { Link } from 'react-router-dom';
 
 function PodcastProfile() {
 
-    const handleDeletePodcast = useOutletContext();
+    const {handleDeletePodcast} = useOutletContext();
 
-    const [podcast, setPodcasts] = useState([]);
+    const [showReviews, setShowReviews] = useState(false);
+    const [editPodcast, setEditPodcast] = useState(false);
+    const [podcast, setPodcast] = useState({});
     const params = useParams()
     const podcastId = params.id;
 
     useEffect(() => {
         fetch(`/podcasts/${podcastId}`)
             .then((r) => r.json())
-            .then((podcast) => setPodcasts(podcast))
+            .then((podcast) => setPodcast(podcast))
             .catch(error => console.error(error))
     }, [podcastId])
 
@@ -23,13 +27,19 @@ function PodcastProfile() {
     }
 
     function handleDeleteClick() {
-        fetch(`/podcasts/${podcastId}`, {
+        fetch(`/userspodcasts/${podcastId}`, {
             method: "DELETE",
         })
         handleDeletePodcast(podcastId)
     }
 
-    
+    function handleReviewsClick() {
+        setShowReviews(true)
+    }
+
+    function handleEditPodcast() {
+        setEditPodcast(true)
+    }
 
     return(
         <>
@@ -40,11 +50,15 @@ function PodcastProfile() {
                 <p>Rating: {podcast.rating}</p>
                 <img src={podcast.image} alt={podcast.channel} />
                 <br />
-                <button>Edit Podcast</button>
+                <button onClick={handleEditPodcast}>Edit Podcast Information</button>
+                {editPodcast ? <EditPodcastForm podcastId={podcastId} podcast={podcast} setPodcast={setPodcast} /> : null}
                 <br />
-                <button onClick={handleDeleteClick}>Delete Podcast</button>
+                <button onClick={handleDeleteClick}>
+                Delete Podcast
+                </button>
                 <br />
-                <button>Add Podcast Review</button>
+                <button onClick={handleReviewsClick}>See Podcast Reviews</button>
+                {showReviews ? <UserPodcastReviews podcastId={podcastId} /> : null}
             </main>
         </>
     )

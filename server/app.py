@@ -68,6 +68,48 @@ class UsersPodcasts(Resource):
     
 api.add_resource(UsersPodcasts, "/userspodcasts")
 
+class UserPodcastsByID(Resource):
+    
+    def patch(self, id):
+        
+        json = request.get_json()
+        
+        podcast = Podcast.query.filter(Podcast.id == id).first()
+        for attr in json:
+            setattr(podcast, attr, json[attr])
+            
+        db.session.add(podcast)
+        db.session.commit()
+        
+        response = make_response(
+            podcast.to_dict(),
+            200
+        )
+        
+        return response
+    
+    def delete(self, id):
+        
+        podcast = Podcast.query.filter_by(id=id).first()
+        db.session.delete(podcast)
+        db.session.commit()
+        
+        response = make_response({'message': 'successful deletion of podcast'}, 202)
+        
+        return response
+    
+api.add_resource(UserPodcastsByID, "/userspodcasts/<int:id>")
+
+class PodcastReviews(Resource):
+    
+    def get(self, id):
+        
+        podcast = Podcast.query.filter(Podcast.id == id).first()
+        
+        return [podcast_review.to_dict() for podcast_review in podcast.user_podcast_reviews]
+    
+api.add_resource(PodcastReviews, '/podcastreviews/<int:id>')
+
 class UserByID(Resource):
     
     def get(self, id):

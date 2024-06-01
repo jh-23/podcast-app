@@ -1,34 +1,43 @@
 import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 
-function EditPodcast() {
+function EditPodcastForm({ podcastId, podcast, setPodcast }) {
 
-    const handleUpdatePodcast = useOutletContext();
+    const {handleUpdatePodcast} = useOutletContext();
+    console.log(handleUpdatePodcast);
+    console.log(podcast)
+
+    console.log(podcastId)
+
+    const [editedPodcast, setEditedPodcast] = useState({});
 
     const [channel, setChannel] = useState(podcast.channel)
-    const [podcastStart, setPodcastStart] = useState(podcast.podcastStart)
+    const [podcastStart, setPodcastStart] = useState(podcast.podcast_start)
     const [episodes, setEpisodes] = useState(podcast.episodes)
     const [image, setImage] = useState(podcast.image)
     const [rating, setRating] = useState(podcast.rating)
 
+    console.log(podcastStart)
+
     function handleSubmit(e) {
         e.preventDefault()
 
-        fetch(`/podcasts/${id}`, {
+        fetch(`/userspodcasts/${podcastId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(
-                channel,
-                podcastStart,
-                episodes,
-                image,
-                rating
-            )
+            body: JSON.stringify({
+                channel: channel,
+                podcast_start: podcastStart,
+                episodes: episodes,
+                image: image,
+                rating: rating
+        })
         })
             .then((r) => r.json())
-            .then((updatedPodcast) => handleUpdatePodcast(updatedPodcast))
+            .then((updatedPodcast) => {handleUpdatePodcast(updatedPodcast) 
+            setPodcast(updatedPodcast)})
     }
 
     return(
@@ -53,4 +62,4 @@ function EditPodcast() {
     )
 }
 
-export default EditPodcast;
+export default EditPodcastForm;

@@ -49,7 +49,7 @@ function App() {
     setPodcastReview(updatedPodcastReviewList)
   }
 
-  if(!user) return <LoginForm />
+  if(!user) return <LoginForm onLogin={setUser} />
 
 
   return (
@@ -57,7 +57,7 @@ function App() {
       <header>
         <NavBar />
       </header>
-      <Outlet context={{addPodcast, addPodcastReview, handleUpdatePodcast, handleDeletePodcast, user, setUser}} />
+      <Outlet context={{addPodcast, addPodcastReview, handleUpdatePodcast, handleDeletePodcast, user, setUser, podcasts, setPodcasts }} />
     </>
   )
 }

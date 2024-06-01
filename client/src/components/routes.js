@@ -16,7 +16,7 @@ const routes = [
                 element: <Home />
             },
             {
-                path:"/newpodcastform",
+                path: "/newpodcastform",
                 element: <NewPodcastForm />
             },
             {
@@ -35,6 +35,10 @@ const routes = [
             {
                 path: "/logout",
                 element: <Logout />
+            },
+            {
+                path: "/userspodcasts",
+                element: <Home />
             }
         ]
     },

@@ -1,17 +1,17 @@
 import React, { useState, useEffect} from 'react';
 import PodcastCard from './PodcastCard';
+import { useOutletContext } from 'react-router-dom';
 
 function Login() {
 
-    // pass down user and setuser state
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const {user, setUser} = useOutletContext();
+
     const [getPodcasts, setGetPodcasts] = useState([]);
 
     useEffect(() => {
         fetch("/userspodcasts")
             .then((r) => r.json())
-            .then((getPodcasts) => setGetPodcasts(getPodcasts))
+            .then((user) => setGetPodcasts(user))
     }, [])
 
     console.log(getPodcasts);
@@ -21,7 +21,7 @@ function Login() {
         <div>
             {getPodcasts.map((getPodcast) => {
                 return <PodcastCard key={getPodcast.id} getPodcast={getPodcast} />
-})}
+            })}
         </div>
     )
 }
