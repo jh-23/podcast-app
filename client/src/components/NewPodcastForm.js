@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 
-function NewPodcastForm() {
+function NewPodcastForm({ podcastId }) {
 
-    const addPodcast = useOutletContext()
+    const {addPodcast} = useOutletContext();
 
     const [channel, setChannel] = useState("")
     const [podcastStart, setPodcastStart] = useState("")
@@ -15,7 +15,7 @@ function NewPodcastForm() {
         e.preventDefault();
         const formData = {
             channel: channel,
-            podcas_start: podcastStart,
+            podcast_start: podcastStart,
             episodes: episodes,
             image: image,
             rating: rating
@@ -26,7 +26,9 @@ function NewPodcastForm() {
         setImage("");
         setRating("")
 
-        fetch('/podcasts', {
+        console.log(formData);
+
+        fetch('/userspodcasts', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -36,6 +38,8 @@ function NewPodcastForm() {
             .then((r) => r.json())
             .then((podcast) => addPodcast(podcast))
         }
+
+        
             
         return(
             <div className="new-podcast-form">

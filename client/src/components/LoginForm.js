@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
+import SignupForm from './SignupForm';
 
 
 function LoginForm({ onLogin }) {
@@ -8,6 +9,7 @@ function LoginForm({ onLogin }) {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [showSignUp, setShowSignUp] = useState(false);
 
     function handleSubmit(e){
         e.preventDefault()
@@ -28,10 +30,15 @@ function LoginForm({ onLogin }) {
         })
     }
 
+    function handleSignUpClick(){
+        setShowSignUp(true)
+    }
+
     return(
         <form onSubmit={handleSubmit} >
             <h2>Welcome to the Podcast Reviews App! </h2>
-                <label htmlFor='username'>Username: </label>
+            <h4>Please enter your account's username and password to view Podcast Information</h4>
+                <label htmlFor='username'>Username:</label>
             <input 
                 type="text"
                 id="username"
@@ -39,17 +46,23 @@ function LoginForm({ onLogin }) {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
-                <label htmlFor='password'>Password: </label>
+            <br />
+                <label htmlFor='password'>Password:</label>
                 <input
                 type="password"
                 id="password"
                 autoComplete='current-password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                ></input>
+                >
+                </input>
+                <br />
                 <button variant='fill' color='primary' type="submit">
                 {isLoading ? "Loading..." : "Login"}
                 </button>
+                <h4>Don't have an account?  Sign up here:</h4>
+                <button onClick={handleSignUpClick}>Signup</button>
+                {showSignUp ? <SignupForm /> : null}
         </form>
     )
 }

@@ -4,11 +4,13 @@ import { useOutletContext } from 'react-router-dom';
 import UserPodcastReviews from './UserPodcastReviews';
 import EditPodcastForm from './EditPodcastForm';
 import { Link } from 'react-router-dom';
+import NewPodcastForm from './NewPodcastForm';
 
 function PodcastProfile() {
 
     const {handleDeletePodcast} = useOutletContext();
 
+    const [showFormInfo, setShowFormInfo] = useState(false);
     const [showReviews, setShowReviews] = useState(false);
     const [editPodcast, setEditPodcast] = useState(false);
     const [podcast, setPodcast] = useState({});
@@ -53,12 +55,15 @@ function PodcastProfile() {
                 <button onClick={handleEditPodcast}>Edit Podcast Information</button>
                 {editPodcast ? <EditPodcastForm podcastId={podcastId} podcast={podcast} setPodcast={setPodcast} /> : null}
                 <br />
+                {showFormInfo ? <NewPodcastForm podcastId={podcastId} /> : null}
                 <button onClick={handleDeleteClick}>
                 Delete Podcast
                 </button>
                 <br />
                 <button onClick={handleReviewsClick}>See Podcast Reviews</button>
                 {showReviews ? <UserPodcastReviews podcastId={podcastId} /> : null}
+                <br />
+                <button>Click to Add Review for this Podcast</button>
             </main>
         </>
     )

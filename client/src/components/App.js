@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../NavBar";
 import { Outlet } from 'react-router-dom';
-import LoginForm from "../LoginForm";
+import LoginForm from "./LoginForm";
 
 function App() {
 

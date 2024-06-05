@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 
 
-function NewReview() {
+function AddPodcastReview() {
 
     const addPodcastReview = useOutletContext();
 
@@ -38,4 +38,4 @@ function NewReview() {
     )
 }
 
-export default NewReview;
+export default AddPodcastReview;

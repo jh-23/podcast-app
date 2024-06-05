@@ -2,8 +2,8 @@ import App from "./App.js"
 import PodcastProfile from "./PodcastProfile.js"
 import NewPodcastForm from "./NewPodcastForm.js"
 import Home from "./Home.js"
-import LoginForm from "../LoginForm.js"
-import NewReview from "./NewReview.js"
+import LoginForm from "./LoginForm.js"
+import NewReview from "./AddPodcastReview.js"
 import Logout from "./Logout.js"
 
 const routes = [
