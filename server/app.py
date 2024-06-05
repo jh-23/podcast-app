@@ -66,9 +66,99 @@ class UsersPodcasts(Resource):
         
         return [podcast.to_dict() for podcast in user.user_podcast_reviews]
     
+    def post(self):
+        
+        json = request.get_json()
+        
+        user = User.query.filter(User.id == session['user_id']).first()
+        
+        new_podcast = Podcast(
+            channel = json.get('channel'),
+            podcast_start = json.get('podcast_start'),
+            episodes = json.get('episodes'),
+            image = json.get('image'),
+            rating = json.get('rating')
+        )
+
+        db.session.add(new_podcast)
+        db.session.commit()
+        
+        
+        new_user_podcast_review = UserPodcastReview(            
+            podcast_review = "",
+            user_id = user.id,
+            podcast_id = new_podcast.id
+        )
+        
+        db.session.add(new_user_podcast_review)
+        db.session.commit()
+        
+        response_dict = new_podcast.to_dict()
+        
+        response = make_response(
+            response_dict,
+            201
+        )
+        
+        return response
+    
 api.add_resource(UsersPodcasts, "/userspodcasts")
 
+class UserPodcastByIDAddReview(Resource):
+    
+    def post(self):
+        
+        json = request.get_json()
+        
+        user = User.query.filter(User.id == session['user_id']).first()
+        
+        podcast = Podcast.query.filter(Podcast.id == id).first()
+        
+        new_review = UserPodcastReview(
+            podcast_review = json.get('podcast_review'),
+            user_id = user.id,
+            podcast_id = podcast.id
+        )
+        
+        db.session.add(new_review)
+        db.session.commit()
+        
+        response_dict = new_review.to_dict()
+        
+        response = make_response(
+            response_dict,
+            201
+        )
+        
+        return response
+        
+api.add_resource(UserPodcastByIDAddReview, "/userspodcastaddreview")
+
 class UserPodcastsByID(Resource):
+    
+    def post(self):
+        
+        json = request.get_json()
+        
+        new_podcast = Podcast(
+            channel = json.get('channel'),
+            podcast_start = json.get('podcast_start'),
+            episodes = json.get('episodes'),
+            image = json.get('image'),
+            rating = json.get('rating')
+        )
+        
+        db.session.add(new_podcast)
+        db.session.commit()
+        
+        response_dict = new_podcast.to_dict()
+        
+        response = make_response(
+            response_dict,
+            201
+        )
+        
+        return response
     
     def patch(self, id):
         
@@ -259,7 +349,6 @@ class UserPodcastReviewByID(Resource):
         return response
     
 api.add_resource(UserPodcastReviewByID, '/reviews/<int:id>')
-
 
 class Login(Resource):
     
