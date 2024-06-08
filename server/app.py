@@ -64,7 +64,7 @@ class UsersPodcasts(Resource):
         
         user = User.query.filter(User.id == session['user_id']).first()
         
-        return [podcast.to_dict() for podcast in user.user_podcast_reviews]
+        return [podcast.to_dict() for podcast in set([podcast_review.podcast for podcast_review in user.user_podcast_reviews])]
     
     def post(self):
         
