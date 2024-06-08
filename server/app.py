@@ -112,6 +112,7 @@ class UserPodcastByIDAddReview(Resource):
         
         user = User.query.filter(User.id == session['user_id']).first()
         
+        id = json.get('podcast_id')
         podcast = Podcast.query.filter(Podcast.id == id).first()
         
         new_review = UserPodcastReview(
