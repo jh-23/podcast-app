@@ -6,6 +6,7 @@ import EditPodcastForm from './EditPodcastForm';
 import { Link } from 'react-router-dom';
 import NewPodcastForm from './NewPodcastForm';
 import AddPodcastReview from './AddPodcastReview';
+import styled from 'styled-components';
 
 function PodcastProfile() {
 
@@ -49,13 +50,25 @@ function PodcastProfile() {
         setAddNewReview(true)
     }
 
+    const H1 = styled.h1`
+    color: blue;
+    font-size: 4rem;
+    `
+
+    const H3 = styled.h1`
+    color: blue;
+    `
+    const P = styled.p`
+    color: blue;`
+
+
     return(
         <>
             <main>
-                <h1>Podcast: {podcast.channel}</h1>
-                <h3>Podcast Start (Year): {podcast.podcast_start}</h3>
-                <p>Episodes: {podcast.episodes}</p>
-                <p>Rating: {podcast.rating}</p>
+                <H1>Podcast: {podcast.channel}</H1>
+                <H3>Podcast Start (Year): {podcast.podcast_start}</H3>
+                <P>Episodes: {podcast.episodes}</P>
+                <P>Rating: {podcast.rating}</P>
                 <img src={podcast.image} alt={podcast.channel} />
                 <br />
                 <button onClick={handleEditPodcast}>Edit Podcast Information</button>

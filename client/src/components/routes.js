@@ -48,10 +48,6 @@ const routes = [
 
         ]
     },
-    // {
-    //     path:"/loginform",
-    //     element: <LoginForm /> 
-    // }
 ];
 
 export default routes;

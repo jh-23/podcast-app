@@ -1,0 +1,23 @@
+.App {
+    text-align: left;
+    background-image: url('https://www.wework.com/ideas/wp-content/uploads/sites/4/2022/07/20191105_1001-Woodward-Ave-Detroit_009_v1-scaled.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.Login {
+    text-align: left;
+    background-image: url('https://www.wework.com/ideas/wp-content/uploads/sites/4/2022/07/20191105_1001-Woodward-Ave-Detroit_009_v1-scaled.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.link-styles {
+    color: turquoise;
+}

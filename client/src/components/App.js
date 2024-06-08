@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../NavBar";
 import { Outlet } from 'react-router-dom';
 import LoginForm from "./LoginForm";
+import './App.css';
 
 function App() {
 
@@ -53,12 +54,12 @@ function App() {
 
 
   return (
-    <>
+    <div className="App">
       <header>
         <NavBar />
       </header>
       <Outlet context={{addPodcast, addPodcastReview, handleUpdatePodcast, handleDeletePodcast, user, setUser, podcasts, setPodcasts }} />
-    </>
+    </div>
   )
 }
 

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
 import SignupForm from './SignupForm';
+import './App.css';
+import styled from 'styled-components';
+import Label from './Label.js'
 
 
 function LoginForm({ onLogin }) {
@@ -34,13 +36,22 @@ function LoginForm({ onLogin }) {
         setShowSignUp(true)
     }
 
+    const H1 = styled.h1`
+    color: blue;
+    font-size: 4rem;
+    `
+
+    const H4 = styled.h1`
+    color: blue;
+    `
+
     return(
-        <div>
+        <div className='Login'>
             {showSignUp ? (<SignupForm /> ): (
         <form onSubmit={handleSubmit} >
-            <h2>Welcome to the Podcast Reviews App! </h2>
-            <h4>Please enter your account's username and password to view Podcast Information</h4>
-                <label htmlFor='username'>Username:</label>
+            <H1>Welcome to the Podcast Reviews App! </H1>
+            <H4>Please enter your account's username and password to view Podcast Information</H4>
+                <Label htmlFor='username'>Username:</Label>
             <input 
                 type="text"
                 id="username"
@@ -49,7 +60,7 @@ function LoginForm({ onLogin }) {
                 onChange={(e) => setUsername(e.target.value)}
             />
             <br />
-                <label htmlFor='password'>Password:</label>
+                <Label htmlFor='password'>Password:</Label>
                 <input
                 type="password"
                 id="password"
@@ -62,9 +73,8 @@ function LoginForm({ onLogin }) {
                 <button variant='fill' color='primary' type="submit">
                 {isLoading ? "Loading..." : "Login"}
                 </button>
-                <h4>Don't have an account?  Sign up here:</h4>
+                <H4>Don't have an account?  Sign up here:</H4>
                 <button onClick={handleSignUpClick}>Signup</button>
-                {/* {showSignUp && <SignupForm />} */}
         </form>
         )}
         </div>
