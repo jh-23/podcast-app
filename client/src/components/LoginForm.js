@@ -35,6 +35,8 @@ function LoginForm({ onLogin }) {
     }
 
     return(
+        <div>
+            {showSignUp ? (<SignupForm /> ): (
         <form onSubmit={handleSubmit} >
             <h2>Welcome to the Podcast Reviews App! </h2>
             <h4>Please enter your account's username and password to view Podcast Information</h4>
@@ -62,8 +64,10 @@ function LoginForm({ onLogin }) {
                 </button>
                 <h4>Don't have an account?  Sign up here:</h4>
                 <button onClick={handleSignUpClick}>Signup</button>
-                {showSignUp ? <SignupForm /> : null}
+                {/* {showSignUp && <SignupForm />} */}
         </form>
+        )}
+        </div>
     )
 }
 

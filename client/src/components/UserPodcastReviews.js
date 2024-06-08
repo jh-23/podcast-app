@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 function UserPodcastReviews({ podcastId }) {
 
     const [podcastReviews, setPodcastReviews] = useState([]);
@@ -15,12 +16,17 @@ function UserPodcastReviews({ podcastId }) {
 
     console.log(podcastReviews)
 
+    const podcastReviewList = podcastReviews.map((podcastReview) => {
+        return podcastReview.podcast_review
+    })
+
     if(podcastReviews.length < 1) return <h1>Loading...</h1>
 
     return(
         <div>
             <h1>Reviews: </h1>
-            {podcastReviews[0].podcast_review}
+            {/* {podcastReviews[0].podcast_review} */}
+            {podcastReviewList}
         </div>
     )
 }

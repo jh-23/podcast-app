@@ -2,21 +2,23 @@ import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 
 
-function AddPodcastReview() {
+function AddPodcastReview({ podcastId }) {
 
-    const addPodcastReview = useOutletContext();
+    const {addPodcastReview, user} = useOutletContext();
 
     const [podcastReview, setPodcastReview] = useState("");
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch('/reviews', {
+        fetch('/userspodcastaddreview', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                podcastReview: podcastReview
+                podcast_review: podcastReview,
+                user_id: user.id,
+                podcast_id: podcastId
             }),
         })
             .then((r) => r.json())

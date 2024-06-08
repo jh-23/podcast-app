@@ -5,6 +5,7 @@ import UserPodcastReviews from './UserPodcastReviews';
 import EditPodcastForm from './EditPodcastForm';
 import { Link } from 'react-router-dom';
 import NewPodcastForm from './NewPodcastForm';
+import AddPodcastReview from './AddPodcastReview';
 
 function PodcastProfile() {
 
@@ -14,6 +15,7 @@ function PodcastProfile() {
     const [showReviews, setShowReviews] = useState(false);
     const [editPodcast, setEditPodcast] = useState(false);
     const [podcast, setPodcast] = useState({});
+    const [addNewReview, setAddNewReview] = useState(false);
     const params = useParams()
     const podcastId = params.id;
 
@@ -43,6 +45,10 @@ function PodcastProfile() {
         setEditPodcast(true)
     }
 
+    function handleAddNewPodcastReviewClick() {
+        setAddNewReview(true)
+    }
+
     return(
         <>
             <main>
@@ -63,7 +69,9 @@ function PodcastProfile() {
                 <button onClick={handleReviewsClick}>See Podcast Reviews</button>
                 {showReviews ? <UserPodcastReviews podcastId={podcastId} /> : null}
                 <br />
-                <button>Click to Add Review for this Podcast</button>
+                <button onClick={handleAddNewPodcastReviewClick}>Click to Add Review for this Podcast</button>
+                {addNewReview ? <AddPodcastReview podcastId={podcastId} /> : null}
+                
             </main>
         </>
     )

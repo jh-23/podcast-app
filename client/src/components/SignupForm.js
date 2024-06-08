@@ -8,14 +8,14 @@ function SignupForm() {
     const [users, setUsers] = useState([{}]);
     const [refreshPage, setRefreshPage] = useState(false);
 
-    useEffect(() => {
-        fetch("/users")
-            .then((r) => r.json())
-            .then((data) => {
-                setUsers(data)
-                console.log(data)
-            })
-    }, [refreshPage])
+    // useEffect(() => {
+    //     fetch("/users")
+    //         .then((r) => r.json())
+    //         .then((data) => {
+    //             setUsers(data)
+    //             console.log(data)
+    //         })
+    // }, [refreshPage])
 
     const formSchema = yup.object().shape({
         username: yup.string().required("Must enter a valid username"),
@@ -29,7 +29,7 @@ function SignupForm() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            fetch("/users", {
+            fetch("users", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
