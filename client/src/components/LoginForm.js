@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import SignupForm from './SignupForm';
 import './App.css';
-import styled from 'styled-components';
 import Label from './Label.js'
+import H1 from './H1';
+import H4 from './H4';
 
 
 function LoginForm({ onLogin }) {
@@ -35,15 +36,6 @@ function LoginForm({ onLogin }) {
     function handleSignUpClick(){
         setShowSignUp(true)
     }
-
-    const H1 = styled.h1`
-    color: blue;
-    font-size: 4rem;
-    `
-
-    const H4 = styled.h1`
-    color: blue;
-    `
 
     return(
         <div className='Login'>

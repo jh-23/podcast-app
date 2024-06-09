@@ -3,10 +3,11 @@ import { useParams } from 'react-router-dom';
 import { useOutletContext } from 'react-router-dom';
 import UserPodcastReviews from './UserPodcastReviews';
 import EditPodcastForm from './EditPodcastForm';
-import { Link } from 'react-router-dom';
 import NewPodcastForm from './NewPodcastForm';
 import AddPodcastReview from './AddPodcastReview';
-import styled from 'styled-components';
+import H1 from './H1';
+import H3 from './H3';
+import P from './P';
 
 function PodcastProfile() {
 
@@ -49,18 +50,6 @@ function PodcastProfile() {
     function handleAddNewPodcastReviewClick() {
         setAddNewReview(true)
     }
-
-    const H1 = styled.h1`
-    color: blue;
-    font-size: 4rem;
-    `
-
-    const H3 = styled.h1`
-    color: blue;
-    `
-    const P = styled.p`
-    color: blue;`
-
 
     return(
         <>

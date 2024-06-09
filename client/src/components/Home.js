@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import PodcastCard from './PodcastCard';
 import { useOutletContext } from 'react-router-dom';
-
+import H1 from './H1.js';
 
 function Home() {
 
@@ -35,7 +35,7 @@ function Home() {
 
     return(
         <div className='Home'>
-            <h1>User's Podcasts:</h1>
+            <H1>User's Podcasts:</H1>
             {podcastList}
         </div>
     )
