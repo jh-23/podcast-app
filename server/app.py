@@ -407,6 +407,7 @@ class Signup(Resource):
     
     def post(self):
         
+
         json = request.get_json()
         user = User(
             username=json.get('username')

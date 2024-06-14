@@ -93,7 +93,7 @@ with app.app_context():
             channel="Huberman Lab",
             podcast_start="2020",
             episodes="221",
-            image="https://supercast-storage-assets.b-cdn.net/channel/3050/artwork/medium-e94c6fcf00a6db9444f5c26eb44ef3e6.jpg",
+            image="https://i.scdn.co/image/ab6765630000ba8aaa4830256e4b613f07287208",
             rating="4.8 out of 5"
         ))
         
