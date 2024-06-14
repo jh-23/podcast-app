@@ -2,12 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import styled from 'styled-components';
+import Input from './Input.js';
+import Label from './Label.js';
 
-function SignupForm() {
+
+const  SignupForm = () => {
 
     const [users, setUsers] = useState([{}]);
     const [refreshPage, setRefreshPage] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     // useEffect(() => {
     //     fetch("/users")
@@ -30,7 +33,8 @@ function SignupForm() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            fetch("users", {
+            console.log("I have been clicked")
+            fetch("/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -46,47 +50,37 @@ function SignupForm() {
 
     return (
         <div>
+            <h2>Sign up here to create a Podcasts Account: </h2>
             <form onSubmit={formik.handleSubmit} style={{ margin: "30px"}}>
-                <label htmlFor="username">Username</label>
+                <Label htmlFor="username">Username</Label>
                 <br />
-                <input
+                <Input
                     id="username"
                     name="username"
                     onChange={formik.handleChange}
                     value={formik.values.username}
                 >
-                </input>
+                </Input>
                 <p style={{ color: "red" }}> {formik.errors.username}</p>
                 <br />
 
-                <input
+
+                <Label htmlFor='password'>Password</Label>
+                <Input
                     id="password"
                     name="password"
                     onChange={formik.handleChange}
                     value={formik.values.password}
                 >
-                </input>
+                </Input>
                 <p style={{ color: "red" }}> {formik.errors.password}</p>
-                <label htmlFor='password'>Password</label>
+                
                 <br />
+                <button type='submit'>{isLoading ? "Loading..." : "Sign Up"}</button>
             </form>
             <table style = {{ padding: "15px" }}>
-                <tbody>
-                    <tr>
-                        <th>username</th>
-                        <th>password</th>
-                    </tr>
-                    {typeof users === "undefined" ? (
-                        <p>Loading</p>
-                    ) : (users.map((user, i) => (
-                            <tr key={i}>
-                                <td>{user.username}</td>
-                                <td>{user.password}</td>
-                            </tr>
-                    ))
-                )}
-                </tbody>
             </table>
+            
         </div>
     )
 

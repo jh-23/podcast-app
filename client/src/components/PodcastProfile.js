@@ -60,19 +60,25 @@ function PodcastProfile() {
                 <P>Rating: {podcast.rating}</P>
                 <img src={podcast.image} alt={podcast.channel} />
                 <br />
+                <br />
                 <button onClick={handleEditPodcast}>Edit Podcast Information</button>
                 {editPodcast ? <EditPodcastForm podcastId={podcastId} podcast={podcast} setPodcast={setPodcast} /> : null}
+                <br />
                 <br />
                 {showFormInfo ? <NewPodcastForm podcastId={podcastId} /> : null}
                 <button onClick={handleDeleteClick}>
                 Delete Podcast
                 </button>
                 <br />
+                <br />
                 <button onClick={handleReviewsClick}>See Podcast Reviews</button>
                 {showReviews ? <UserPodcastReviews podcastId={podcastId} /> : null}
                 <br />
+                <br />
                 <button onClick={handleAddNewPodcastReviewClick}>Click to Add Review for this Podcast</button>
                 {addNewReview ? <AddPodcastReview podcastId={podcastId} /> : null}
+                <br />
+                <br />
                 
             </main>
         </>

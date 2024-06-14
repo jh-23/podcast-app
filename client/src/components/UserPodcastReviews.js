@@ -17,7 +17,7 @@ function UserPodcastReviews({ podcastId }) {
     console.log(podcastReviews)
 
     const podcastReviewList = podcastReviews.map((podcastReview) => {
-        return podcastReview.podcast_review
+        return <div className='podcast-reviews'>{podcastReview.podcast_review}</div>
     })
 
     if(podcastReviews.length < 1) return <h1>Loading...</h1>
@@ -25,7 +25,6 @@ function UserPodcastReviews({ podcastId }) {
     return(
         <div>
             <h1>Reviews: </h1>
-            {/* {podcastReviews[0].podcast_review} */}
             {podcastReviewList}
         </div>
     )

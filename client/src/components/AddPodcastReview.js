@@ -35,6 +35,7 @@ function AddPodcastReview({ podcastId }) {
             value={podcastReview}
             onChange={(e) => setPodcastReview(e.target.value)}
             />
+            <br />
             <button type="submit">Add Podcast Review</button>
         </form>
     )

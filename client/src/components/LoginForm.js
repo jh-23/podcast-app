@@ -40,6 +40,7 @@ function LoginForm({ onLogin }) {
     return(
         <div className='Login'>
             {showSignUp ? (<SignupForm /> ): (
+        <>
         <form onSubmit={handleSubmit} >
             <H1>Welcome to the Podcast Reviews App! </H1>
             <H4>Please enter your account's username and password to view Podcast Information</H4>
@@ -66,8 +67,10 @@ function LoginForm({ onLogin }) {
                 {isLoading ? "Loading..." : "Login"}
                 </button>
                 <H4>Don't have an account?  Sign up here:</H4>
-                <button onClick={handleSignUpClick}>Signup</button>
+                
         </form>
+        <button onClick={handleSignUpClick}>Signup</button>
+        </>
         )}
         </div>
     )

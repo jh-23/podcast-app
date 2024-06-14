@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
+import Label from './Label';
+import Input from './Input';
 
 function EditPodcastForm({ podcastId, podcast, setPodcast }) {
 
@@ -42,20 +44,20 @@ function EditPodcastForm({ podcastId, podcast, setPodcast }) {
 
     return(
             <form className='edit-podcast-info' onSubmit={handleSubmit}>
-                    <label>Channel: </label>
+                    <Label>Channel: </Label>
                     <input type="text" name="channel" placeholder="Podcast name" value={channel} onChange={(e) => setChannel(e.target.value)} />
                     <br />
-                    <label>Podcast Start (Year): </label>
-                    <input type="text" name="podcast start" placeholder="Podcast start" value={podcastStart} onChange={(e) => setPodcastStart(e.target.value)} />
+                    <Label>Podcast Start (Year): </Label>
+                    <Input type="text" name="podcast start" placeholder="Podcast start" value={podcastStart} onChange={(e) => setPodcastStart(e.target.value)} />
                     <br />
-                    <label>Number of Episodes: </label>
-                    <input type="text" name="number of episodes" placeholder="Number of episodes" value={episodes} onChange={(e) => setEpisodes(e.target.value)} />
+                    <Label>Number of Episodes: </Label>
+                    <Input type="text" name="number of episodes" placeholder="Number of episodes" value={episodes} onChange={(e) => setEpisodes(e.target.value)} />
                     <br />
-                    <label>Podcast Image URL: </label>
-                    <input type="text" name="podcast image" placeholder="Podcast image" value={image} onChange={(e) => setImage(e.target.value)} />
+                    <Label>Podcast Image URL: </Label>
+                    <Input type="text" name="podcast image" placeholder="Podcast image" value={image} onChange={(e) => setImage(e.target.value)} />
                     <br />
-                    <label>Podcast Rating: </label>
-                    <input type="text" name="podcast rating" placeholder="Podcast rating" value={rating} onChange={(e) => setRating(e.target.value)} />
+                    <Label>Podcast Rating: </Label>
+                    <Input type="text" name="podcast rating" placeholder="Podcast rating" value={rating} onChange={(e) => setRating(e.target.value)} />
                     <br />
                     <button type="submit">Submit</button>
             </form>
