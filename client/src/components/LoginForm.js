@@ -43,6 +43,9 @@ function LoginForm({ onLogin }) {
         <>
         <form onSubmit={handleSubmit} >
             <H1>Welcome to the Podcast Reviews App! </H1>
+            <br />
+            <br />
+            <br />
             <H4>Please enter your account's username and password to view Podcast Information</H4>
                 <Label htmlFor='username'>Username:</Label>
             <input 
@@ -66,10 +69,10 @@ function LoginForm({ onLogin }) {
                 <button variant='fill' color='primary' type="submit">
                 {isLoading ? "Loading..." : "Login"}
                 </button>
-                <H4>Don't have an account?  Sign up here:</H4>
+                <h4 className='loginform-h4'>Don't have an account?  Click the Sign up button:</h4>
                 
         </form>
-        <button onClick={handleSignUpClick}>Signup</button>
+        <button onClick={handleSignUpClick}>Sign up Here! </button>
         </>
         )}
         </div>

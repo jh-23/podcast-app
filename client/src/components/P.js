@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const P = styled.p`
-color: orange;
+color: gold;
 font-size: 1.5rem;
 `
 

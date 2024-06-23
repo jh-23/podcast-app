@@ -6,7 +6,7 @@ import EditPodcastForm from './EditPodcastForm';
 import NewPodcastForm from './NewPodcastForm';
 import AddPodcastReview from './AddPodcastReview';
 import H1 from './H1';
-import H3 from './H3';
+import H4 from './H4';
 import P from './P';
 
 function PodcastProfile() {
@@ -55,9 +55,9 @@ function PodcastProfile() {
         <>
             <main>
                 <H1>Podcast: {podcast.channel}</H1>
-                <H3>Podcast Start (Year): {podcast.podcast_start}</H3>
-                <P>Episodes: {podcast.episodes}</P>
-                <P>Rating: {podcast.rating}</P>
+                <h4 className='podcast-p-paragraph'>Podcast Start (Year): {podcast.podcast_start}</h4>
+                <p className='podcast-profile-p'>Episodes: {podcast.episodes}</p>
+                <p className='podcast-profile-p'>Rating: {podcast.rating}</p>
                 <img src={podcast.image} alt={podcast.channel} />
                 <br />
                 <br />

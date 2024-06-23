@@ -19,9 +19,39 @@
 }
 
 .link-styles {
-    color: turquoise;
+    color: ghostwhite;
 }
 
 .podcast-reviews {
-    color: red;
+    color: cyan;
+}
+
+.podcast-profile-p {
+    color: cyan;
+    font-size: 1.5rem;
+}
+
+.podcast-p-paragraph {
+    color: cyan;
+    font-size: 1.5rem;
+}
+
+.loginform-h4 {
+    color: lime;
+    font-size: 1.5rem;
+}
+
+.about {
+    color: cyan;
+    font-size: 2rem;
+}
+
+.about-paragraph {
+    color: cyan;
+    font-size: 1rem;
+}
+
+.Reviews-h1 {
+    color: cyan;
+    font-size: 1.5rem;
 }

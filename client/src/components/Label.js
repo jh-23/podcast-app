@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Label = styled.label`
-color: orange;
+color: gold;
 display: block;
 font-size: 1rem;
 font-weight: 700;

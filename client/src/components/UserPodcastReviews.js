@@ -24,7 +24,7 @@ function UserPodcastReviews({ podcastId }) {
 
     return(
         <div>
-            <h1>Reviews: </h1>
+            <h1 className='Reviews-h1'>Reviews: </h1>
             {podcastReviewList}
         </div>
     )

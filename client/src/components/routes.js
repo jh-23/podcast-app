@@ -5,7 +5,7 @@ import Home from "./Home.js"
 import LoginForm from "./LoginForm.js"
 import NewReview from "./AddPodcastReview.js"
 import Logout from "./Logout.js"
-import SignupForm from "./SignupForm.js"
+import About from "./About.js"
 
 const routes = [
     {
@@ -41,6 +41,10 @@ const routes = [
                 path: "/userspodcasts",
                 element: <Home />
             },
+            {
+                path:"/about",
+                element: <About />
+            }
         ]
     },
 ];

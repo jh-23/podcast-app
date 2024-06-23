@@ -19,6 +19,11 @@ function NavBar() {
                 New Podcast Form
                 </NavLink>
                 <NavLink
+                to='/about'
+                className='nav-link'
+                >About
+                </NavLink>
+                <NavLink
                 to='/logout'
                 className='nav-link'
                 >
