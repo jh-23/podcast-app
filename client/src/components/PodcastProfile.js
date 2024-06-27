@@ -6,8 +6,6 @@ import EditPodcastForm from './EditPodcastForm';
 import NewPodcastForm from './NewPodcastForm';
 import AddPodcastReview from './AddPodcastReview';
 import H1 from './H1';
-import H4 from './H4';
-import P from './P';
 
 function PodcastProfile() {
 

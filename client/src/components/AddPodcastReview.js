@@ -22,7 +22,8 @@ function AddPodcastReview({ podcastId }) {
             }),
         })
             .then((r) => r.json())
-            .then((newReview) => addPodcastReview(newReview))
+            .then((newReview) => {
+                addPodcastReview(newReview)})
     }
 
     return(

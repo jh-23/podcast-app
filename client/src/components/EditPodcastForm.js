@@ -11,8 +11,6 @@ function EditPodcastForm({ podcastId, podcast, setPodcast }) {
 
     console.log(podcastId)
 
-    const [editedPodcast, setEditedPodcast] = useState({});
-
     const [channel, setChannel] = useState(podcast.channel)
     const [podcastStart, setPodcastStart] = useState(podcast.podcast_start)
     const [episodes, setEpisodes] = useState(podcast.episodes)

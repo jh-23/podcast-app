@@ -53,7 +53,7 @@ function Home() {
     }
 
 
-    const podcastList = podcasts.map((podcast) => (
+    const podcastList = podcasts?.map((podcast) => (
         <PodcastCard key={podcast.id} podcast={podcast} />
     ));
 

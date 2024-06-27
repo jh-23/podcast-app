@@ -4,13 +4,16 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Input from './Input.js';
 import Label from './Label.js';
+import { useNavigate } from 'react-router-dom';
 
 
-const  SignupForm = () => {
+const  SignupForm = ({ onLogin }) => {
 
     const [users, setUsers] = useState([{}]);
     const [refreshPage, setRefreshPage] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     // useEffect(() => {
     //     fetch("/users")
@@ -41,18 +44,23 @@ const  SignupForm = () => {
                 },
                 body: JSON.stringify(values, null, 2),
             }).then((r) => {
-                if (r.status === 200) {
-                    setRefreshPage(!refreshPage)
+                if (r.status === 201) {
+                    // navigate("/")
+                    onLogin(r)
                 }
             })
         }
     })
 
+    function handleSignUpClick() {
+        navigate('/')
+    }
+
     return (
         <div>
-            <h2>Sign up here to create a Podcasts Account: </h2>
+            <h2 className='signup-form-h2'>Sign up here to create a Podcasts Account: </h2>
             <form onSubmit={formik.handleSubmit} style={{ margin: "30px"}}>
-                <Label htmlFor="username">Username</Label>
+                <Label htmlFor="username">Username:</Label>
                 <br />
                 <Input
                     id="username"
@@ -65,7 +73,7 @@ const  SignupForm = () => {
                 <br />
 
 
-                <Label htmlFor='password'>Password</Label>
+                <Label htmlFor='password'>Password:</Label>
                 <Input
                     id="password"
                     name="password"
@@ -76,7 +84,7 @@ const  SignupForm = () => {
                 <p style={{ color: "red" }}> {formik.errors.password}</p>
                 
                 <br />
-                <button type='submit'>{isLoading ? "Loading..." : "Sign Up"}</button>
+                <button onClick={handleSignUpClick} type='submit'>{isLoading ? "Loading..." : "Sign Up"}</button>
             </form>
             <table style = {{ padding: "15px" }}>
             </table>

@@ -14,7 +14,7 @@ function About() {
                 New users can use the Sign up form on the front page to make their podcast account and start posting the podcasts they listen to!
                 <br />
                 <br />
-                This full-stack application was created React as a front-end and Flask SQLAlchemy as the backend.  
+                This full-stack application was created with React as a front-end and Flask (SQLAlchemy) as the backend.  
             </p>
         </div>
     );

@@ -4,6 +4,7 @@ import './App.css';
 import Label from './Label.js'
 import H1 from './H1';
 import H4 from './H4';
+import { Link } from 'react-router-dom'
 
 
 function LoginForm({ onLogin }) {
@@ -39,7 +40,7 @@ function LoginForm({ onLogin }) {
 
     return(
         <div className='Login'>
-            {showSignUp ? (<SignupForm /> ): (
+            {showSignUp ? (<SignupForm onLogin={onLogin} /> ): (
         <>
         <form onSubmit={handleSubmit} >
             <H1>Welcome to the Podcast Reviews App! </H1>
@@ -72,7 +73,9 @@ function LoginForm({ onLogin }) {
                 <h4 className='loginform-h4'>Don't have an account?  Click the Sign up button:</h4>
                 
         </form>
+        <Link to="/signupform">
         <button onClick={handleSignUpClick}>Sign up Here! </button>
+        </Link>
         </>
         )}
         </div>

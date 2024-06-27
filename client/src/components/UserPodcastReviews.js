@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from 'react';
+import { Outlet, useOutletContext } from 'react-router-dom'
 
 
 function UserPodcastReviews({ podcastId }) {
 
-    const [podcastReviews, setPodcastReviews] = useState([]);
+    const {podcastReview, setPodcastReview} = useOutletContext();
 
     useEffect(() => {
         fetch(`/podcastreviews/${podcastId}`)
             .then((r) => r.json())
-            .then((podcastReviews) => setPodcastReviews(podcastReviews))
+            .then((podcastReviews) => setPodcastReview(podcastReviews))
             .catch(error => {
                 console.error('Error', error);
             });
     }, [])
 
-    console.log(podcastReviews)
+    console.log(podcastReview)
 
-    const podcastReviewList = podcastReviews.map((podcastReview) => {
+    const podcastReviewList = podcastReview.map((podcastReview) => {
         return <div className='podcast-reviews'>{podcastReview.podcast_review}</div>
     })
 
-    if(podcastReviews.length < 1) return <h1>Loading...</h1>
+    if(podcastReview.length < 1) return <h1>Loading...</h1>
 
     return(
         <div>

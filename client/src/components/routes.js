@@ -6,6 +6,7 @@ import LoginForm from "./LoginForm.js"
 import NewReview from "./AddPodcastReview.js"
 import Logout from "./Logout.js"
 import About from "./About.js"
+import SignupForm from "./SignupForm.js"
 
 const routes = [
     {
@@ -32,6 +33,10 @@ const routes = [
             {
                 path: "/login",
                 element: <LoginForm />
+            },
+            {
+                path:"/signupform",
+                element: <SignupForm />
             },
             {
                 path: "/logout",

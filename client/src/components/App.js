@@ -7,7 +7,7 @@ import './App.css';
 function App() {
 
   const [podcasts, setPodcasts] = useState([]);
-  const [podcastReview, setPodcastReview] = useState("");
+  const [podcastReview, setPodcastReview] = useState([]);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -52,13 +52,15 @@ function App() {
 
   if(!user) return <LoginForm onLogin={setUser} />
 
+  console.log(user)
+
 
   return (
     <div className="App">
       <header>
         <NavBar />
       </header>
-      <Outlet context={{addPodcast, addPodcastReview, handleUpdatePodcast, handleDeletePodcast, user, setUser, podcasts, setPodcasts }} />
+      <Outlet context={{addPodcast, addPodcastReview, handleUpdatePodcast, handleDeletePodcast, user, setUser, podcasts, setPodcasts, podcastReview, setPodcastReview}} />
     </div>
   )
 }
