@@ -13,12 +13,24 @@ from config import app, db, api
 # Add your model imports
 from models import db, User, Podcast, UserPodcastReview
 
+@app.before_request
+def check_if_logged_in():
+    open_access_list = [
+        'signup',
+        'login',
+        'check_session'
+    ]
 
+    if (request.endpoint) not in open_access_list and (not session.get('user_id')):
+        return {'error': '401 Unauthorized'}, 401
+    
 # Views go here!
 
 @app.route('/')
 def index():
     return '<h1>Project Server</h1>'
+
+
 
 # User Routes - Resources
 
@@ -222,6 +234,7 @@ api.add_resource(UserByID, '/users/<int:id>')
 class Podcasts(Resource):
     
     def get(self):
+        
         podcast_dict_list = [podcast.to_dict() for podcast in Podcast.query.all()]
         
         response = make_response(
@@ -424,17 +437,43 @@ class Signup(Resource):
         
 api.add_resource(Signup, '/signup', endpoint='signup')
 
-@app.before_request
-def check_if_logged_in():
-    open_access_list = [
-        'signup',
-        'login',
-        'check_session'
-    ]
-
-    if (request.endpoint) not in open_access_list and (not session.get('user_id')):
-        return {'error': '401 Unauthorized'}, 401
+@app.route('/podcasts1')
+def get_podcasts():
     
+    channel = request.args.get('channel')
+    
+    if channel:
+        podcasts = Podcast.query.filter(Podcast.channel.ilike(f"%{channel}%")).all()
+    else:
+        podcasts = Podcast.query.all()
+        
+    podcast_dict_list = [podcast.to_dict() for podcast in podcasts]
+    
+    return make_response(podcast_dict_list)
+
+class PodcastResource(Resource):
+    
+    def get(self):
+        
+        highly_rated_podcasts = Podcast.query.filter(Podcast.rating > 4.5).all()
+        
+        serialized_podcasts = [podcast.to_dict(rules=('-user_podcast_reviews.podcast',)) for podcast in highly_rated_podcasts]
+        
+        return make_response(serialized_podcasts)
+    
+api.add_resource(PodcastResource, '/api/podcasts/highly_rated')
+
+class PodcastEpisodes(Resource):
+    
+    def get(self):
+        
+        high_number_episodes = Podcast.query.filter(Podcast.episodes > 300).all()
+        
+        serialized_podcasts = [podcast.to_dict(rules=('-user_podcast_reviews.podcast',)) for podcast in high_number_episodes]
+        
+        return make_response(serialized_podcasts)
+
+api.add_resource(PodcastEpisodes, '/api/podcasts/high_episodes')
 
 
 if __name__ == '__main__':

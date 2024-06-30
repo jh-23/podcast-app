@@ -56,54 +56,54 @@ with app.app_context():
             id=1,
             channel="Modern Wisdom",
             podcast_start="2018",
-            episodes="780",
+            episodes=780,
             image="https://is1-ssl.mzstatic.com/image/thumb/Podcasts122/v4/99/dc/91/99dc9113-546a-038a-7204-84c6265b6766/mza_5176103474815286855.jpg/626x0w.webp",
-            rating="4.7 out of 5"
+            rating=4.7
         ))
         
         podcasts_to_add.append(Podcast(
             id=2,
             channel="Stuff You Should Know",
             podcast_start="2008",
-            episodes="2000",
+            episodes=2000,
             image="https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/17/a1/ce/17a1ce39-f248-8750-351a-0201206df213/mza_6600839420822557618.jpg/626x0w.webp",
-            rating="4.5 out of 5"
+            rating=4.5
         ))
         
         podcasts_to_add.append(Podcast(
             id=3,
             channel="The Joe Rogan Experience",
             podcast_start="2009",
-            episodes="2156",
+            episodes=2156,
             image="https://upload.wikimedia.org/wikipedia/en/4/4b/The_Joe_Rogan_Experience_logo.jpg",
-            rating="4.6 out of 5"
+            rating=4.6
         ))
         
         podcasts_to_add.append(Podcast(
             id=4,
             channel="Dateline NBC",
             podcast_start="2019",
-            episodes="523",
+            episodes=523,
             image="https://i.iheart.com/v3/url/aHR0cHM6Ly9pbWFnZS5zaW1wbGVjYXN0Y2RuLmNvbS9pbWFnZXMvYWUxODNmZTItYzYzNC00NThhLTkzZGQtNTc3MGYwNjc2Zjc3L2IwMTA4MDlhLWMzMTEtNDI1Yy05MzI1LTIyMzVjMjFlNjkzOS8zMDAweDMwMDAvN2YwNDIxZjczZDJjZTBjYTI3MmUzOTJjOTM3ZTFhMzAxMjg1ZDQ0ZmU3YzZkNzEwYzI4NDRkODBjMGM3YmIxYTNlOTgzOGFjMDNlZTgwZmM2NDE5OTg5MWNiOWQ1YzZlOWQ0NDkwZjUwODFmYjM3OWMwYWIyMzE3ZjJjYWRmMTQuanBlZz9haWQ9cnNzX2ZlZWQ",
-            rating="4.4 out of 5"
+            rating=4.4
         ))
         
         podcasts_to_add.append(Podcast(
             id=5,
             channel="Huberman Lab",
             podcast_start="2020",
-            episodes="221",
+            episodes=221,
             image="https://i.scdn.co/image/ab6765630000ba8aaa4830256e4b613f07287208",
-            rating="4.8 out of 5"
+            rating=4.8
         ))
         
         podcasts_to_add.append(Podcast(
             id=6,
             channel="The Rest is History",
             podcast_start="2020",
-            episodes="620",
+            episodes=620,
             image="https://i.scdn.co/image/ab6765630000ba8a053b0b90a2dcd86e3eaad82a",
-            rating="4.7 out of 5"
+            rating=4.7
         ))
         
         db.session.add_all(podcasts_to_add)

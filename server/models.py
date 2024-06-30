@@ -72,9 +72,9 @@ class Podcast(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     channel = db.Column(db.String)
     podcast_start = db.Column(db.String)
-    episodes = db.Column(db.String)
+    episodes = db.Column(db.Integer)
     image = db.Column(db.String)
-    rating = db.Column(db.String)
+    rating = db.Column(db.Float)
 
     #relationship method that maps our Podcast to UserPodcastReview
     user_podcast_reviews = db.relationship('UserPodcastReview', back_populates='podcast', cascade='all, delete-orphan')
