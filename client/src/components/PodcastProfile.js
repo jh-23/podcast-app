@@ -55,7 +55,7 @@ function PodcastProfile() {
                 <H1>Podcast: {podcast.channel}</H1>
                 <h4 className='podcast-p-paragraph'>Podcast Start (Year): {podcast.podcast_start}</h4>
                 <p className='podcast-profile-p'>Episodes: {podcast.episodes}</p>
-                <p className='podcast-profile-p'>Rating: {podcast.rating}</p>
+                <p className='podcast-profile-p'>Rating: {podcast.rating} out of 5</p>
                 <img src={podcast.image} alt={podcast.channel} />
                 <br />
                 <br />
